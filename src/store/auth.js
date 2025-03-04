@@ -15,7 +15,7 @@ export const useAuth=defineStore("authStore",{
     console.log('====================================');
     console.log(username,password);
     console.log('====================================');
-    if(username==="alan"&&password==="121212"){
+    if(username==="smart"&&password==="121212"){
         const user = { username,expire:Date.now()+60*60*24*30 *1000,role:"admin" };
         localStorage.setItem('user', JSON.stringify(user));  
         localStorage.setItem("authorized",true)
