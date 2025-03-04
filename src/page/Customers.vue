@@ -78,10 +78,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  
- <!-- header -->
-<HomeHeader :InsertHandle="InsertCustomer" :AddHandler="AddHandler" :showadditional="showadditional" :v-model="searchText" />
-<HomeShow :Customer="customer"/>
+   
+
+    <!-- header -->
+    <HomeHeader :InsertHandle="InsertCustomer" :AddHandler="AddHandler" :showadditional="showadditional" :v-model="searchText" />
+    <HomeShow :Customer="customer"/>
+   
 </template>
 
 <style scoped>
@@ -102,5 +104,8 @@ onUnmounted(() => {
   border: 1px solid #ccc;
   border-radius: 5px;
   background: #f8f9fa;
+}
+div{
+  /* height: 100vh; */
 }
 </style>

@@ -36,6 +36,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', checkScreenSize);
 });
+const user=JSON.parse(localStorage.getItem('user'))
+console.log('====================================');
+console.log(user.role==="Admin");
+console.log('====================================');
 </script>
 
 <template>
@@ -74,7 +78,7 @@ onUnmounted(() => {
           @click="!isLargeScreen ? SlideHandle : () => {}"
           v-slot="{ isActive }"
         >
-          <div class="menu-link-content" :class="{ active: isActive }">
+          <div v-if="(user.role=='admin'&&route.admin)||!route.admin" class="menu-link-content" :class="{ active: isActive }">
             <span v-if="route.icon" class="route-icon">
               <component :is="route.icon" />
             </span>

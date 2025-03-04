@@ -25,33 +25,23 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('resize', checkWidth);
 });
-const type = ref('');
+let type = ref('');
 const handleLogin = async () => {
     try {
         const result = await login(username.value, password.value);
   
-        status.value = result[2];
+        show.value = result[2];
         type.value = result[1];
-        console.log('====================================');
-        console.log( 
-            show.value ,
-        status.value ,
-        type.value 
-    );
-        console.log('====================================');
-        
+ 
         if (result[0]) {
             username.value = '';
             password.value = '';
-
             setTimeout(() => { 
                 status.value = ''; 
                 type.value = ''
-                router.push('/customers'); 
+               window.location.pathname="/customers"
             }, 2000);
-        }
- 
- 
+        } 
     } catch (error) {
         console.error('Error logging in:', error);
     }
@@ -68,7 +58,7 @@ watch(show, (newValue) => {
 
 <template>
     <div class="login-page">
-        <Alert :show="show" :type="type" :message="status" />
+        <Alert :show="show" :type="type" :message="show" />
         <div class="login-container">
             <div class="login-form-container">
                 <div class="login-form-wrapper">
@@ -77,28 +67,23 @@ watch(show, (newValue) => {
                     
                     <form class="login-form" @submit.prevent="handleLogin">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <Inputs v-model="username" :Type="'text'" id="username" placeholder="Enter your username" />
+                    
+                            <Inputs v-model="username" Label="user" :Type="'text'" id="username" placeholder="Enter your username" />
                         </div>
                         
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <Inputs v-model="password" :Type="'password'" id="password" placeholder="Enter your password" />
+        
+                            <Inputs v-model="password" Label="password" :Type="'password'" id="password" placeholder="Enter your password" />
                         </div>
                         
                         <div class="form-options">
-                            <div class="remember-me">
-                                <input type="checkbox" id="remember" />
-                                <label for="remember">Remember me</label>
-                            </div>
-                            <a href="#" class="forgot-password">Forgot Password?</a>
+   
+ 
                         </div>
                         
                         <button type="submit" class="login-button">Sign In</button>
                         
-                        <div class="signup-link">
-                            Don't have an account? <a href="#">Sign up</a>
-                        </div>
+ 
                     </form>
                 </div>
             </div>

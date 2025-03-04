@@ -12,27 +12,29 @@ export const useAuth=defineStore("authStore",{
    
     const userTable=JSON.parse(localStorage.getItem("usertable"))    
     console.log(userTable);
+    console.log('====================================');
+    console.log(username,password);
+    console.log('====================================');
     if(username==="alan"&&password==="121212"){
-        const user = { username,expire:Date.now()+60*60*24*30 *1000,role:"Admin" };
+        const user = { username,expire:Date.now()+60*60*24*30 *1000,role:"admin" };
         localStorage.setItem('user', JSON.stringify(user));  
         localStorage.setItem("authorized",true)
         this.user = user; // Update the Pinia state
-        return ["success","login success"];
+        return [true,"success","login success"];
     }else{
         userTable.map(e=>{
             
             if(username===e.username&&password===e.password){
-                const user = { username,expire:Date.now()+60*60*24*30 *1000,role:"Admin" };
+                const user = { username,expire:Date.now()+60*60*24*30 *1000,role:e.role };
                 localStorage.setItem('user', JSON.stringify(user));  
                 localStorage.setItem("authorized",true)
                 this.user = user; // Update the Pinia state
-                return ["success","login success"];
+                return [true,"success","login success"];
             }
-            
-            console.log("hassisiii");
         })    
     }
-    return ["error","login error"];
+    return [false,"error","login false"];
+ 
   
         },
         logout(){
