@@ -20,12 +20,12 @@ const props = defineProps({
   }
 });
 
-// Track screen width for responsive behavior
+
 const isLargeScreen = ref(false);
 const sidebarVisible = computed(() => isLargeScreen.value || props.ShowMenu);
 
 const checkScreenSize = () => {
-  isLargeScreen.value = window.innerWidth >= 1380; // 1024px is typical lg breakpoint
+  isLargeScreen.value = window.innerWidth >= 1380; 
 };
 
 onMounted(() => {
@@ -43,14 +43,14 @@ console.log('====================================');
 </script>
 
 <template>
-  <!-- Overlay only visible on mobile when menu is open -->
+ 
   <div 
     v-if="!isLargeScreen && ShowMenu" 
     @click="SlideHandle" 
     class="overlay"
   ></div>
   
-  <!-- Sidebar - always visible on lg screens, controlled by ShowMenu on mobile -->
+ 
   <transition name="slide">
     <div v-if="sidebarVisible" class="menu" :class="{ 'menu-desktop': isLargeScreen }">
       <div class="menu-header">
@@ -58,7 +58,7 @@ console.log('====================================');
           <img v-if="appLogo" :src="appLogo" alt="Logo" class="menu-logo" />
           <h2 class="menu-title">Menu</h2>
         </div>
-        <!-- Only show close button on mobile -->
+       
         <button v-if="!isLargeScreen" class="close-button" @click="SlideHandle" aria-label="Close menu">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -96,12 +96,12 @@ console.log('====================================');
     </div>
   </transition>
   
-  <!-- Content spacer for large screens to push main content -->
+ 
   <div v-if="isLargeScreen" class="content-spacer"></div>
 </template>
 
 <style scoped>
-/* Overlay styling - only for mobile */
+
 .overlay {
   position: fixed;
   top: 0;
@@ -113,7 +113,7 @@ console.log('====================================');
   z-index: 999;
 }
 
-/* Menu panel styling */
+
 .menu {
   width: 280px;
   max-width: 85%;
@@ -130,21 +130,21 @@ console.log('====================================');
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Desktop specific styles */
+
 .menu-desktop {
   position: fixed;
-  transform: none !important; /* Prevent transform animations on desktop */
+  transform: none !important; 
   box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Content spacer to push main content on large screens */
+
 .content-spacer {
   width: 280px;
   height: 100%;
   flex-shrink: 0;
 }
 
-/* Menu header styling */
+
 .menu-header {
   padding: 24px 20px;
   display: flex;
@@ -191,14 +191,14 @@ console.log('====================================');
   transform: rotate(90deg);
 }
 
-/* Divider styling */
+
 .menu-divider {
   height: 1px;
   background-color: rgba(255, 255, 255, 0.15);
   margin: 0;
 }
 
-/* Navigation styling */
+
 .menu-nav {
   display: flex;
   flex-direction: column;
@@ -262,7 +262,7 @@ console.log('====================================');
   letter-spacing: 0.3px;
 }
 
-/* Menu footer */
+
 .menu-footer {
   margin-top: auto;
   padding-bottom: 16px;
@@ -275,7 +275,7 @@ console.log('====================================');
   text-align: center;
 }
 
-/* Slide animation - only applies on mobile */
+
 .slide-enter-active {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -294,7 +294,7 @@ console.log('====================================');
   opacity: 0;
 }
 
-/* Media query to prevent animations on large screens */
+
 @media (min-width: 1024px) {
   .menu {
     transition: none;

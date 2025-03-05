@@ -49,18 +49,16 @@ export const customerTable=defineStore("customerTable",{
             return [...this.customerTable];
         },
         getone(id){
-            console.log('====================================');
-            console.log(id);
-            console.log('====================================');
+ 
             return this.customerTable.find(user=>user.Id==id)
         },
         getandupdatfreetrial(id,auto){
             const Invoice = this.customerTable.find(constract=>constract.Id===id)
-            console.log(Invoice,"dfsffddf",auto,id);
+ 
             
             if (!Invoice) return  [false,"error","customer found"];
             Invoice.freetrial = auto;
-            console.log(Invoice,"rere");
+ 
             localStorage.setItem(
               "customerTable",
               JSON.stringify(this.customerTable)

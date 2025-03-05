@@ -16,20 +16,16 @@ const p = defineProps({
 }) 
 let show = ref('');
 let type = ref('');
- 
-const name=ref('')
+
 const price=ref(0)
 
 const startd=ref('')
-const payment=ref('')
+
 const InvoiceStore=InvoiceTable()
 const InsertInvoice =()=>{
-    console.log('====================================');
-    console.log("ssss");
-    console.log('====================================');
    const res= InvoiceStore.create(price.value,startd.value,p.ContractId)
-    console.log("ssss");
-// reload the current page
+
+
 show.value = res[2];
 type.value =res[1];
 if(res[0]){
@@ -48,7 +44,7 @@ watch(show, (newValue) => {
     setTimeout(() => { 
                 show.value = ''; 
                 type.value = ''
-                // router.push('/customer'); 
+
             }, 2000);
 });
 </script>

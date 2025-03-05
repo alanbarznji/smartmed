@@ -13,7 +13,7 @@ const Total = computed(() => {
     return Invoice.value.reduce((sum, e) => sum + (e.state === "done" ? Number(e.payed) : 0), 0);
 });
  
-console.log(Invoice.value,"llllll");
+ 
 const toggleState = (invoiceId, state) => {
     const newState = state === "done" ? "undone" : "done";
     InvoiceStore.getandupdate(invoiceId, newState);

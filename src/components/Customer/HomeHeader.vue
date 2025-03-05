@@ -4,15 +4,14 @@ import Input from '../../Util/Input.vue';
 import { customerTable } from '../../store/Customer';
 import Alert from '../../Util/Alert.vue';
 
-defineProps({
+const p=defineProps({
     AddHandler: Function,
     showadditional: Boolean,
     modelValue: String
 });
-
 defineEmits(['update:modelValue']);
 
-const customerStore = customerTable(); // Access Pinia store
+const customerStore = customerTable(); 
 const name = ref('');
 const note = ref('');
 const checkfreeTrial = ref(false);
@@ -20,16 +19,8 @@ const address = ref('');
 const phone = ref('');
 const freetrial = ref('');
 const started = ref('');
-const searchshow = ref(false);
 let show = ref('');
 let type = ref('');
-const SearchHandler = () => {
-    searchshow.value = !searchshow.value;
-};
-
-const checkHandler = () => {
-    checkfreeTrial.value = !checkfreeTrial.value;
-};
 
 watch(checkfreeTrial, () => {
     if (!checkfreeTrial.value) {
@@ -53,7 +44,6 @@ const InsertCustomer = (event) => {
         alert('Please fill in required fields');
         return;
     }
- 
   const res=  customerStore.create(     
         name.value,
         address.value,
@@ -63,8 +53,6 @@ const InsertCustomer = (event) => {
         freetrial.value,
         note.value,
     );
-    console.log(res);
-    
   if(res[0]){
     show.value = res[1];
     type.value =res[2];
@@ -72,7 +60,13 @@ const InsertCustomer = (event) => {
     setTimeout(() => { 
                 show.value = ''; 
                 type.value = ''
-               
+                name.value=""
+        address.value=""
+        phone.value=""
+        checkfreeTrial.value=""
+        started.value=""
+        freetrial.value=""
+        note.value=""
             }, 2000);
     resetForm();
   }
@@ -84,7 +78,15 @@ watch(show, (newValue) => {
     setTimeout(() => { 
                 show.value = ''; 
                 type.value = ''
-                // router.push('/customer'); 
+                show.value = ''; 
+                type.value = ''
+                name.value=""
+        address.value=""
+        phone.value=""
+        checkfreeTrial.value=""
+        started.value=""
+        freetrial.value=""
+        note.value=""
             }, 2000);
 });
 </script>
@@ -94,15 +96,10 @@ watch(show, (newValue) => {
         <Alert :type="show" :message="type"/>
         <div class="search-container d-flex justify-content-between align-items-center px-4 py-3">
             <div class="search-input-container d-flex align-items-center">
-                <button @click="SearchHandler" class="search-icon-button btn btn-light me-2">
-                    <i class="pi pi-search"></i>
+                <button  class="search-icon-button btn btn-light me-2">
+              
                 </button>
-                <input 
-                    :class="searchshow ? 'search-input active' : 'search-input'" 
-                    type="text"  
-                    @input="$emit('update:modelValue', $event.target.value)" 
-                    placeholder="Search customers..."
-                />
+ 
             </div>
             <button @click="AddHandler" class="add-button btn btn-primary">
                 <i class="pi pi-plus me-2"></i>
@@ -160,7 +157,7 @@ watch(show, (newValue) => {
 </template>
 
 <style scoped>
-/* Main layout styles */
+ 
 .search-container {
     background-color: #f8f9fa;
     border-radius: 8px;

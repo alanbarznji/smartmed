@@ -49,10 +49,7 @@ const InsertCustomer = (event) => {
     event.preventDefault();
     console.log(p.ContractId,ExpireDate.value,payment.value,note.value)
  const con=contractStore.update(p.ContractId,ExpireDate.value,payment.value,monthely.value,note.value)
-//  expiredate, payment, note
-    
-    resetForm();
-
+    resetForm()
 };
 
 </script>

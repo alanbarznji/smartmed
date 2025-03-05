@@ -28,40 +28,32 @@ export const InvoiceTable = defineStore("InvoiceTable", {
       const invoice=this.InvoiceTable.filter(inv=>inv.contractId == idContract)
       let total=0+Number(price)
       invoice.map(e=>{
-        console.log(e);
+     
         
         total+=Number(e.payed)
       })
       if(total>contract[0].payment){
-        console.log(
-          [false,"You have paid more than the contract payment"]
-        );
+   
         return [false,"error","You have paid more than the contract payment"]
       }
-      console.log(contract[0].payment,total);
+ 
       const latestInvoice=invoice[invoice.length-1]
      const check= invoice.find(inv => {
       const dateexpire=new Date(contract.expiredate).getTime();
       const date=new Date(startdate).getTime();
       if(date>dateexpire){
-        console.log(
-          [false,"Contract expired"]
-        );
+ 
         return [false,"error","Contract expired"]
       }
         const [year,month,day]=inv.startdate.split("-")
         const [yearnew,monthnew,daynew]=startdate.split("-")
  
         if(Number(contract[0].expiredate.split("-")[0])<Number(yearnew)){
-          console.log(
-            [false,"Contract expired"]
-          );
+   
           return [false,"error","Contract expired"]
         }
         if(month===monthnew && yearnew===year){
-          console.log(
-            [false,"these day alredy found"]
-          );
+ 
           
           return [false,"error","these day alredy found"]
         }
@@ -74,31 +66,31 @@ export const InvoiceTable = defineStore("InvoiceTable", {
       if(customers.freetrial){
 
           newInvoice = {
-          ...latestInvoice, // Copy old invoice data
-          Id: (this.InvoiceTable.length || 0) + 1, // New unique ID
-          startdate: startdate, // Update start date
-          state: "done", // Mark as unpaid
-          payed: 0, // Initialize new invoice with 0 payed amount
+          ...latestInvoice,  
+          Id: (this.InvoiceTable.length || 0) + 1,  
+          startdate: startdate,  
+          state: "done",  
+          payed: 0,  
           freetrial:true
         };
       }else{
         newInvoice = {
-          ...latestInvoice, // Copy old invoice data
-          Id: (this.InvoiceTable.length || 0) + 1, // New unique ID
-          startdate: startdate, // Update start date
-          state: "Undone", // Mark as unpaid
-          payed: Number(price), // Initialize new invoice with 0 payed amount
+          ...latestInvoice, 
+          Id: (this.InvoiceTable.length || 0) + 1, 
+          startdate: startdate, 
+          state: "Undone", 
+          payed: Number(price), 
           freetrial:false
         };
       }
     
-    // Store the new invoice
+    
     this.InvoiceTable.push(newInvoice);
       localStorage.setItem(
         "InvoiceTable",
         JSON.stringify(this.InvoiceTable)
       );
-      console.log("ssssssss",price, startdate,idContract);
+ 
       
       return [true, "success","success crate imvoice"];
     },
@@ -131,7 +123,7 @@ export const InvoiceTable = defineStore("InvoiceTable", {
       let invoices = this.InvoiceTable.filter(invoice => invoice.contractId == id);
       const customer=JSON.parse(localStorage.getItem("customerTable"));
       if (invoices.length === 0) {
-          console.log("No invoices found for this contract.");
+ 
           return [false,"error","No invoices found for this contract."];
       }
   
@@ -139,12 +131,11 @@ export const InvoiceTable = defineStore("InvoiceTable", {
       const contractStore = JSON.parse(localStorage.getItem("constractsTable")) || [];
       const contract = contractStore.filter(contract => contract.Id == id);
       const customerOne=customer.find(contracts=> contracts.Id==contract[0].customerId)
-console.log(contract);
+ 
 
 if(contract[0].auto){
 
   if (!contract) {
-    console.log("Contract not found. Cannot generate invoices.");
     return invoices;
   }
 
@@ -158,10 +149,10 @@ if(contract[0].auto){
       totalPaid+=Number(sum.payed)
     }
   });
-  console.log(`Total Paid: ${totalPaid} / Contract Payment: ${totalContractPayment}`);
+
   contract.totalPaid=totalPaid
   if (totalPaid >= totalContractPayment) {
-    console.log("Total contract payment reached. No more invoices will be generated.");
+
     return invoices;
   }
 
@@ -180,10 +171,8 @@ if(contract[0].auto){
   });
   
   if (existingInvoice.length >0) {
-    console.log("Invoice for this month already exists. No new invoice created.");
     return invoices; 
   }
-  console.log("Today is the first day of the month! Generating a new invoice...");
   let newInvoice ={}
   if(customerOne.ftreetrial){
 
@@ -208,9 +197,9 @@ if(contract[0].auto){
 
     }
     
-  // Store the new invoice
+  
   this.InvoiceTable.push(newInvoice);
-  console.log("New invoice created:", newInvoice);
+ 
 }
 
       localStorage.setItem("InvoiceTable", JSON.stringify(this.InvoiceTable));
@@ -219,10 +208,10 @@ if(contract[0].auto){
 ,  
     
     getandupdate(id,state){
-      console.log(id,state,"message", this.InvoiceTable);
+ 
       
       const Invoice = this.InvoiceTable.find(constract=>constract.Id===id)
-      console.log(Invoice);
+ 
       
       if (!Invoice) return [false,"error", "notfound"];
       if (state.length > 0) Invoice.state = state;
@@ -239,7 +228,7 @@ if(contract[0].auto){
       
       if (!Invoice) return [false,"error", "notfound"];
       if(Invoice.freetrial){
-        console.log([false,"error", "freeTrial"]);
+    
         
         Invoice.payed = 0;
         [false,"error", "freeTrial"]
@@ -248,7 +237,7 @@ if(contract[0].auto){
 
         Invoice.payed = payed;
       }
-      console.log(Invoice,"message");
+ 
         localStorage.setItem(
         "InvoiceTable",
         JSON.stringify(this.InvoiceTable)

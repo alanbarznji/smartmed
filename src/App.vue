@@ -29,6 +29,7 @@ onMounted(() => {
     window.addEventListener('popstate', updatePath);
 });
 onUnmounted(() => {
+    
     window.removeEventListener('resize', checkWidth);
     window.removeEventListener('popstate', updatePath);
 });
@@ -40,22 +41,25 @@ const routes = [
         path: '/admin',
   
         name: 'admin',
-
+        admin:true
+        
     },
     {
         path: '/contracts',
-  
+        
         name: 'contracts',
-
+        admin:false
+        
     },
-
+    
     {
         path: '/customers',
         
         name: 'customers',
+        admin:false
     },
-
-
+    
+    
 ]
 console.log(path.value!='/');
 

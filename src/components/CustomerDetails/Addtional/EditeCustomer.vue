@@ -21,8 +21,6 @@ const Address = ref('')
 
 const startd = ref('')
 let freetrial = ref('')
-const searchshow = ref(false)
-
 const checkHandler = () => {
     checkfreeTrial.value = !checkfreeTrial.value
 }

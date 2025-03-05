@@ -9,28 +9,25 @@ const p = defineProps({
   AddHandler: Function,
   InvoiceAdd: Function,
   Contract: Object,
-  ShowModalHandler: Function, // Added this based on template usage
+  ShowModalHandler: Function,  
   ContractId:String 
 });
 
-// Invoice Store
+ 
 const InvoiceStore = InvoiceTable();
 const Invoice = computed(() => InvoiceStore.getBy(p.Contract.Id));
  
 const ContractStore = contractsTable();
-// Auto Invoice Toggle (Stored in localStorage)
+ 
 const autoInvoiceEnabled = ref(p.Contract.auto);
 console.log(autoInvoiceEnabled.value) 
 
  
-
-// Watcher to update localStorage when changed
 watch(autoInvoiceEnabled, (newValue) => {
   console.log(autoInvoiceEnabled.value);
   ContractStore.getandupdatauto(p.ContractId,autoInvoiceEnabled.value)
 });
-
-// Calculate totals for the summary section
+ 
 const totalInvoiceAmount = computed(() => {
   let total = 0;
   if (Invoice.value) {
@@ -55,7 +52,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
 
 <template>
   <div class="contract-dashboard">
-    <!-- Header with Title and Actions -->
+ 
     <div class="dashboard-header">
       <div class="title-section">
         <h3>Contract Management</h3>
@@ -63,7 +60,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
       </div>
       
       <div class="actions-section">
-        <!-- Auto-Invoice Toggle with improved styling -->
+ 
         <label class="toggle-container">
           <input type="checkbox"   v-model="autoInvoiceEnabled" />
           <span class="toggle-slider"></span>
@@ -83,7 +80,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
       </div>
     </div>
 
-    <!-- Contract Summary Cards -->
+ 
     <div class="summary-cards">
       <div class="summary-card">
         <div class="card-icon payment-icon">💰</div>
@@ -118,7 +115,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
       </div>
     </div>
 
-    <!-- Contract Details Section -->
+ 
     <div class="details-section">
       <div class="section-header">
         <h4>Contract Details</h4>
@@ -133,8 +130,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
     <button @click.stop="handleDelete" class="btn btn-sm btn-primary btn-outline-danger my-2 border-black">
                           Delete
                         </button>
-
-    <!-- Invoice List Section -->
+ 
     <div class="invoice-section">
       <div class="section-header">
         <h4>Invoices ({{ invoiceCount }})</h4>
@@ -177,7 +173,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
 </template>
 
 <style scoped>
-/* Main Dashboard Container */
+ 
 .contract-dashboard {
   background: #ffffff;
   border-radius: 12px;
@@ -191,7 +187,7 @@ const invoiceCount = computed(() => Invoice.value ? Invoice.value.length : 0);
   margin: 0 auto;
 }
 
-/* Dashboard Header */
+ 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -228,8 +224,7 @@ h3 {
   align-items: center;
   gap: 16px;
 }
-
-/* Toggle Switch */
+ 
 .toggle-container {
   display: flex;
   align-items: center;
@@ -277,8 +272,7 @@ input[type="checkbox"]:checked + .toggle-slider:before {
   font-weight: 600;
   color: #4a5568;
 }
-
-/* Button Group */
+ 
 .btn-group {
   display: flex;
   gap: 10px;
@@ -318,8 +312,7 @@ input[type="checkbox"]:checked + .toggle-slider:before {
 .btn-add:hover {
   background-color: #2c5282;
 }
-
-/* Summary Cards */
+ 
 .summary-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -387,8 +380,7 @@ input[type="checkbox"]:checked + .toggle-slider:before {
   font-weight: 700;
   color: #2d3748;
 }
-
-/* Details Section */
+ 
 .details-section {
   display: flex;
   flex-direction: column;
@@ -433,8 +425,7 @@ input[type="checkbox"]:checked + .toggle-slider:before {
   color: #4a5568;
   line-height: 1.5;
 }
-
-/* Invoice Section */
+ 
 .invoice-section {
   display: flex;
   flex-direction: column;
@@ -500,8 +491,7 @@ input[type="checkbox"]:checked + .toggle-slider:before {
   padding: 32px;
   font-style: italic;
 }
-
-/* Responsive Design */
+ 
 @media (max-width: 768px) {
   .dashboard-header {
     flex-direction: column;

@@ -4,7 +4,7 @@ import App from "./App.vue"
 import { useAuth } from "./store/auth"
  
 import Contracts from "./page/Contracts.vue"
-import Invoices from "./page/Invoices.vue"
+ 
 import Login from "./page/Login.vue"
 import Customers from "./page/Customers.vue"
 import CustomerDetails from "./page/CustomerDetails.vue"
@@ -26,12 +26,7 @@ import AdminPage from "./page/AdminPage.vue"
   meta:  { requiresAuth: true } 
   
 },
-{
-    path: '/invoices',
-    component: Invoices,
-    meta:  { requiresAuth: true } 
-    
-},
+ 
 {
     path: '/',
     component: Login,
@@ -55,7 +50,7 @@ import AdminPage from "./page/AdminPage.vue"
 router.beforeEach((to, from, next) => {
     const authStore = useAuth();
 if(to.path === '/' &&authStore.isLoggedIn&&authStore.user&& authStore.user.expire > Date.now()){
-    if(authStore.role==="Admin"){
+    if(authStore.role==="admin"){
         next('/admin');
     }else{
         next('/customers');

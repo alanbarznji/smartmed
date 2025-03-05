@@ -81,13 +81,11 @@ export const contractsTable = defineStore("constractsTable", {
       return [true,'success',"Contract and Invoice created successfully"];
   },  
     update(id, expiredate, payment,monthly, note) {
-      console.log(
-        id,expiredate,payment,monthly, note
-      );
+   
       
       const manger = JSON.parse(localStorage.getItem("user"));
       const constract = this.constractsTable.find(constract=>constract.Id===id)
-      console.log(constract);
+ 
       
       if (!manger) return [false, "notfound"];
       if (expiredate.length > 0) constract.expiredate =  expiredate 
@@ -128,11 +126,11 @@ export const contractsTable = defineStore("constractsTable", {
     },
     getandupdatauto(id,auto){
       const Invoice = this.constractsTable.find(constract=>constract.Id===id)
-      console.log(Invoice,"dfsffddf",auto,id);
+ 
       
       if (!Invoice) return [false, "notfound"];
       Invoice.auto = auto;
-      console.log(Invoice,"rere");
+ 
       localStorage.setItem(
         "constractsTable",
         JSON.stringify(this.constractsTable)

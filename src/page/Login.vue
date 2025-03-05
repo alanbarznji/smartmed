@@ -50,7 +50,7 @@ watch(show, (newValue) => {
     setTimeout(() => { 
                 status.value = ''; 
                 type.value = 0
-                // router.push('/customer'); 
+ 
             }, 2000);
 });
 

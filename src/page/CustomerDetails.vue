@@ -7,9 +7,9 @@ import InvoiceDetails from "../components/CustomerDetails/InvoiceDetails.vue";
 import EditeCusromer from "../components/CustomerDetails/Addtional/EditeCustomer.vue";
 import EditeContract from "../components/CustomerDetails/Addtional/EditeContract.vue";
 import InvoiceAdd from "../components/CustomerDetails/Addtional/AddInvoice.vue";
-import EditeInvoice from "../components/CustomerDetails/Addtional/EditeInvoice.vue";
+ 
 import { customerTable } from "../store/Customer";
-import { InvoiceTable } from "../store/Invoice";
+ 
 import { contractsTable } from "../store/Contracts";
 const route = useRoute();
 const customerId = ref(route.params.id);  
@@ -18,7 +18,7 @@ const customer = computed(() => customerStore.getone(customerId.value));
 console.log(" customer:", customer.value);
 const ContractStore = contractsTable();
 const Contract =computed(()=>ContractStore.getBy(customerId.value))
-// UI State
+
 const Type = ref();
 let ShowInvoiceEdit = ref(false);
 let ShowInvoiceAdd = ref(false);
@@ -83,7 +83,7 @@ onUnmounted(() => {
 span {
     width: 90%;
     height: 2px;
-    background-color: #aaa; /* لون أفتح */
+    background-color: #aaa;  
     margin: 20px auto;
 }
 
@@ -100,7 +100,7 @@ span {
 }
 @media (max-width: 1024px) {
     .invoice-box {
-        flex-direction: column; /* ✅ جعل التخطيط عموديًا بدلاً من أفقي */
+        flex-direction: column; 
         align-items: center;
         
     }
@@ -117,14 +117,14 @@ span {
     }
 
     .number-container {
-        font-size: 24px; /* ✅ تصغير الرقم داخل الفاتورة على الشاشات الصغيرة */
+        font-size: 24px; 
     }
  
 }
 .InvoiceDetails, .contract {
-    /* background-color: #f8f9fa; */
+ 
     padding: 15px;
-    /* border-radius: 5px; */
+ 
     border: 1px solid #ddd;
 }
  

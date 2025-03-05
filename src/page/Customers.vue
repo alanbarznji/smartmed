@@ -54,7 +54,7 @@ const quantity=ref('')
 const note=ref('')
 const showadditional=ref(false)
 const CustomerTable=customerTable()
-const searchText=ref('')
+  
  
 const AddHandler=()=>{
     showadditional.value=!showadditional.value
@@ -75,13 +75,25 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', checkScreenSize);
 });
+console.log('====================================');
+console.log(customer.value);
+console.log('====================================');
+const searchText = ref("");  
+
+// Computed property to filter customers
+const filteredCustomers = computed(() => {
+    if (!searchText.value.trim()) return customerStore.get();  
+    return customerStore.get().filter(customer => 
+        customer.name.toLowerCase().includes(searchText.value.toLowerCase())
+    );
+});
 </script>
 
 <template>
    
 
     <!-- header -->
-    <HomeHeader :InsertHandle="InsertCustomer" :AddHandler="AddHandler" :showadditional="showadditional" :v-model="searchText" />
+    <HomeHeader :InsertHandle="InsertCustomer" :AddHandler="AddHandler" :showadditional="showadditional" :v-model="searchText"  />
     <HomeShow :Customer="customer"/>
    
 </template>
@@ -105,7 +117,5 @@ onUnmounted(() => {
   border-radius: 5px;
   background: #f8f9fa;
 }
-div{
-  /* height: 100vh; */
-}
+ 
 </style>

@@ -24,16 +24,16 @@ console.log(autoInvoiceEnabled.value)
 
  
 
-// Watcher to update localStorage when changed
+ 
 watch(autoInvoiceEnabled, (newValue) => {
-  console.log(autoInvoiceEnabled.value);
+ 
   customerStore.getandupdatfreetrial(p.Customers.Id,autoInvoiceEnabled.value)
 });
 </script>
 
 <template>
   <div class="container">
-    <!-- Left Section: Customer Information -->
+ 
     <div class="customer-section">
       <div class="customer-header">
         <h2>{{ Customers?.username || "No Name" }}</h2>
@@ -80,7 +80,7 @@ watch(autoInvoiceEnabled, (newValue) => {
       </div>
     </div>
     
-    <!-- Right Section: Invoice Visualization -->
+ 
     <div class="invoice-section">
       <div class="invoice-circle">
         <div class="invoice-inner">
@@ -100,7 +100,7 @@ watch(autoInvoiceEnabled, (newValue) => {
 </template>
 
 <style scoped>
-/* Main Container */
+ 
 .container {
   display: flex;
   gap: 24px;
@@ -119,7 +119,7 @@ watch(autoInvoiceEnabled, (newValue) => {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-/* Customer Section */
+ 
 .customer-section {
   flex: 3;
   display: flex;
@@ -155,7 +155,7 @@ h2 {
   color: #3182ce;
 }
 
-/* Details Section */
+ 
 .details-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -180,8 +180,7 @@ h2 {
   font-size: 16px;
   color: #4a5568;
 }
-
-/* Note Section */
+ 
 .note-section {
   margin-top: 8px;
   padding: 12px;
@@ -196,8 +195,7 @@ h2 {
   color: #4a5568;
   line-height: 1.5;
 }
-
-/* Buttons */
+ 
 .button-group {
   display: flex;
   gap: 12px;
@@ -244,7 +242,7 @@ button {
   font-size: 14px;
 }
 
-/* Invoice Section */
+ 
 .invoice-section {
   flex: 1;
   display: flex;
@@ -295,7 +293,7 @@ button {
   font-weight: 600;
 }
 
-/* Orbit Animation */
+ 
 .orbit {
   width: 100%;
   height: 100%;
